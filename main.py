@@ -1,35 +1,6 @@
 import streamlit as st
 import pandas as pd
-from supabase import create_client, Client
-
-# =========================
-# CONFIG SUPABASE
-# =========================
-
-SUPABASE_URL = st.secrets["SUPABASE_URL"]
-SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-# =========================
-# FUNÇÕES CRUD
-# =========================
-
-def get_usuarios():
-    response = supabase.table("usuario").select("*").order("created_at", desc=True).execute()
-    return pd.DataFrame(response.data)
-
-
-def inserir_usuario(dados):
-    supabase.table("usuario").insert(dados).execute()
-
-
-def atualizar_usuario(id_usuario, dados):
-    supabase.table("usuario").update(dados).eq("id_usuario", id_usuario).execute()
-
-
-def deletar_usuario(id_usuario):
-    supabase.table("usuario").delete().eq("id_usuario", id_usuario).execute()
+from conexao_api import supabase 
 
 
 # =========================
@@ -76,6 +47,8 @@ elif menu == "Cadastrar":
             })
             st.success("Usuário cadastrado!")
 
+
+
 # =========================
 # EDITAR
 # =========================
@@ -83,7 +56,7 @@ elif menu == "Editar":
     df = get_usuarios()
 
     if not df.empty:
-        usuario_id = st.selectbox("Selecione o usuário", df["id_usuario"])
+        usuario_id = st.selectbox("Selecione o usuário", df["nick_usuario"])
 
         usuario = df[df["id_usuario"] == usuario_id].iloc[0]
 
