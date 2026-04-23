@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import conexao_api
+from conexao_api import supabase
 from crud_anigma import listar_enigmas
 
 
