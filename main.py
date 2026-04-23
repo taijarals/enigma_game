@@ -18,11 +18,11 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("👤 Usuário", use_container_width=True):
-        st.switch_page("pages/usuario.py")
+        st.switch_page("usuario.py")
 
 with col2:
     if st.button("🧠 Enigma", use_container_width=True):
-        st.switch_page("pages/enigma.py")
+        st.switch_page("enigma.py")
 
 # Rodapé opcional
 st.write("---")
