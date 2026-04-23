@@ -1,29 +1,58 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Sistema Principal",
+    page_title="Sistema",
     page_icon="🧩",
     layout="centered"
 )
 
-# Título principal
-st.title("🧩 Sistema de Navegação")
-st.markdown("Escolha uma das opções abaixo para continuar:")
+# ============================
+# 🔁 Controle de navegação
+# ============================
+if "page" not in st.session_state:
+    st.session_state.page = "home"
 
-# Espaçamento
-st.write("")
+# ============================
+# 🏠 HOME
+# ============================
+if st.session_state.page == "home":
+    st.title("🧩 Sistema Principal")
 
-# Botões de navegação
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-with col1:
-    if st.button("👤 Usuário", use_container_width=True):
-        st.switch_page("usuario")
+    with col1:
+        if st.button("👤 Usuário"):
+            st.session_state.page = "usuario"
+            st.rerun()
 
-with col2:
-    if st.button("🧠 Enigma", use_container_width=True):
-        st.switch_page("enigma")
+    with col2:
+        if st.button("🧠 Enigma"):
+            st.session_state.page = "enigma"
+            st.rerun()
 
-# Rodapé opcional
-st.write("---")
-st.caption("Selecione uma funcionalidade para iniciar.")
+# ============================
+# 👤 USUÁRIO
+# ============================
+elif st.session_state.page == "usuario":
+    st.title("👤 Tela de Usuário")
+
+    if st.button("⬅️ Voltar"):
+        st.session_state.page = "home"
+        st.rerun()
+
+    # 👉 importa aqui pra evitar conflito
+    import pages.usuario as usuario
+    usuario.main() if hasattr(usuario, "main") else None
+
+# ============================
+# 🧠 ENIGMA
+# ============================
+elif st.session_state.page == "enigma":
+    st.title("🧠 Tela de Enigma")
+
+    if st.button("⬅️ Voltar"):
+        st.session_state.page = "home"
+        st.rerun()
+
+    import pages.enigma as enigma
+    enigma.main() if hasattr(enigma, "main") else None
