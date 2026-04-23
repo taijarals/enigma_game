@@ -57,7 +57,7 @@ elif menu == "Editar":
     df = get_usuarios()
 
     if not df.empty:
-        usuario_id = st.selectbox("Selecione o usuário", df["nick_usuario"])
+        usuario_id = st.selectbox("Selecione o usuário", df["id_usuario"])
 
         usuario = df[df["id_usuario"] == usuario_id].iloc[0]
 
