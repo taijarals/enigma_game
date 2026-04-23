@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-from conexao_api import supabase 
+import crud_usuario
+from conexao_api import supabase
 
 
 # =========================
