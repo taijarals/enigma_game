@@ -1,4 +1,5 @@
 import conexao_api
+from conexao_api import supabase
 
 # =============================
 # 📌 Funções CRUD
